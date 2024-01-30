@@ -32,7 +32,7 @@ export default function LoginForm({
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      const response = await axios.post('/auth/login', data);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data);
       setCookie(response.data.token);
       setDialogOpen(false)
       window.location.reload();

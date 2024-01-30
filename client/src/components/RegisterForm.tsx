@@ -45,7 +45,7 @@ export default function RegisterForm({
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      const response = await axios.post('/auth/register', data);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, data);
       const token = response.data.token;
       setCookie(token)
       window.location.reload();
