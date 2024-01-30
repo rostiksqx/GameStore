@@ -1,11 +1,11 @@
 import http from './fetcher';
 
 export async function getOrder(id: string) {
-  return await http.get(`/orders/${id}`, true);
+  return await http.get(`${process.env.REACT_APP_API_URL}/orders/${id}`, true);
 }
 
 export async function getAllOrders() {
-  return await http.get(`/orders/all`, true);
+  return await http.get(`${process.env.REACT_APP_API_URL}/orders/all`, true);
 }
 
 export async function deleteOrder(orderId: string) {
@@ -25,7 +25,7 @@ export async function changeProductQuantityInOrder(orderId: string, product: str
 }
 
 export async function getUserOrdersById() {
-  return await http.get(`/orders`, true);
+  return await http.get(`${process.env.REACT_APP_API_URL}/orders`, true);
 }
 
 export async function deleteProductFromOrder(orderId: string, product: string) {
