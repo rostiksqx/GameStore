@@ -10,7 +10,7 @@ const fetchUser = async () => {
     return null;
   }
   try {
-    const response = await http.get(`${process.env.REACT_APP_API_URL}/auth/me`, true);
+    const response = await http.get(`/auth/me`, true);
     return response.data;
   } catch (error) {
     toast.error('Внутрішня помилка з автентифікацією. Будь ласка, спробуйте ще раз', {duration: 5000, id: 'fetchUser'});

@@ -2,7 +2,7 @@ import http from './fetcher'
 import {TProductFormSchema} from './types';
 
 async function getAllProducts() {
-  return await http.get(`${process.env.REACT_APP_API_URL}/products`, true);
+  return await http.get(`/products`, true);
 }
 
 async function createProduct(product: TProductFormSchema) {

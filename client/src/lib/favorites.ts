@@ -1,7 +1,7 @@
 import http from "./fetcher";
 
 export async function getFavorites() {
-  return await http.get(`${process.env.REACT_APP_API_URL}/favorites`, true);
+  return await http.get(`/favorites`, true);
 }
 
 const addToFavorites = async (product: string) => {

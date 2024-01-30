@@ -1,7 +1,7 @@
 import http from './fetcher';
 
 export async function getAllCategories() {
-  return await http.get(`${process.env.REACT_APP_API_URL}/category`, true);
+  return await http.get(`/category`, true);
 }
 
 export async function createCategory(name: any) {
