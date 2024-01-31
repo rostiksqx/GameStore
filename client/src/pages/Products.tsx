@@ -39,7 +39,8 @@ export default function Products() {
         toast.error(`Щось пішло не так: ${error.message}`, {id: "products"});
         setError(`Щось пішло не так while fetching products: ${error.message}`);
       });
-  }, []);
+    
+  }, [setProducts, setLoading, setError]);
 
   if (error) {
     return <NotFound helperText={error} buttonText="Перезавантажити" buttonAction={() => window.location.reload()}/>;
@@ -54,6 +55,7 @@ export default function Products() {
                      buttonAction={() => window.location.reload()}/>;
   }
 
+  console.log(filteredProducts)
   const indexOfLastItem = currentPage * pageSize;
   const indexOfFirstItem = indexOfLastItem - pageSize;
   const currentItems = filteredProducts?.slice(indexOfFirstItem, indexOfLastItem);
@@ -62,7 +64,7 @@ export default function Products() {
   return (
     <>
       <div className="w-full h-full">
-        <Header animateableText="Продукти." appearDuration={appearDuration}/>
+        <Header   baseText="Продукти." appearDuration={appearDuration}/>
         <AnimatedSeparator delay={appearDuration + delay}/>
         <motion.div
           initial={{opacity: 0}}

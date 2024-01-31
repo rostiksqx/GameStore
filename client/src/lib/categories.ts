@@ -1,7 +1,7 @@
 import http from './fetcher';
 
 export async function getAllCategories() {
-  return await http.get(`/category`, true);
+  return await http.get('/category', true);
 }
 
 export async function createCategory(name: any) {

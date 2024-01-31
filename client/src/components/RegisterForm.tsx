@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import {setCookie} from "../lib/auth";
 import InputError from "./InputError";
 import {Label} from "./Label";
+import { registerUser } from "../lib/auth";
 
 const RegisterSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(50, "Name must be less than 50 characters"),
@@ -45,9 +46,7 @@ export default function RegisterForm({
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, data);
-      const token = response.data.token;
-      setCookie(token)
+      const response = await registerUser(data);
       window.location.reload();
       toast.success("Успішна реєстрація")
 

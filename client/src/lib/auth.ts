@@ -10,7 +10,7 @@ const fetchUser = async () => {
     return null;
   }
   try {
-    const response = await http.get(`/auth/me`, true);
+    const response = await http.get('/auth/me', true);
     return response.data;
   } catch (error) {
     toast.error('Внутрішня помилка з автентифікацією. Будь ласка, спробуйте ще раз', {duration: 5000, id: 'fetchUser'});
@@ -47,9 +47,31 @@ const updateUser = async ({
   }
 };
 
+const registerUser = async (user: any) => {
+  try {
+    const response = await http.post('/auth/register', user);
+    setCookie(response.data.token);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const loginUser = async (user: any) => {
+  try {
+    const response = await http.post('/auth/login', user);
+    setCookie(response.data.token);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export {
   fetchUser,
   setCookie,
   removeCookie,
   updateUser,
+  registerUser,
+  loginUser
 };

@@ -6,7 +6,6 @@ import apiRouter from './routers/apiRouter.js';
 
 dotenv.config();
 
-
 // Connect to MongoDB
 mongoose.connect(process.env.DBCONN_STRING)
     .then(() => console.log("Connected to MongoDB"))
@@ -27,7 +26,6 @@ app.use((req, res, next) => {
 
 // Import routes
 app.use('/api', apiRouter);
-
 
 // Start the server
 app.listen(PORT, (err) => console.log(err || `Server running on port ${PORT}`));

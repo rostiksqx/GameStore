@@ -2,8 +2,8 @@ import Cookies from "js-cookie";
 import {headerName} from "./constants";
 import {type ClassValue, clsx} from "clsx";
 import {twMerge} from "tailwind-merge";
+import fetcher from "./fetcher";
 import axios from "axios";
-
 
 export function isValidURLImage(url: string) {
   // Regular expression for a valid image URL
@@ -19,6 +19,9 @@ export function isValidURLImage(url: string) {
 
 export const getHeadersWithCookiesByHeaderName = () => {
   const cookie = Cookies.get(headerName);
+  if (!cookie) {
+    return null;
+  }
   return {
     [headerName]: `Bearer ${cookie}`,
   };

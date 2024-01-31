@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {isValidURLImage, setImageUrlFromFile} from "../lib/utils";
+import {isValidURLImage, setImageUrlFromFile, uploadImageToCloud} from "../lib/utils";
 import {Trash2} from "lucide-react";
 import {FaUser} from "react-icons/fa";
 import {updateUser} from "../lib/auth";
@@ -43,14 +43,8 @@ export default function EditProfileForm({initialValues}: { initialValues: any })
     try {
       const formData = new FormData();
       if (values.avatarUrl !== initialValues.avatarUrl) {
-        if (inputType === 'file' && values.avatarUrl instanceof File){
-          formData.append('file', values?.avatarUrl);
-          formData.append('upload_preset', 'gwuh0xnp');
-          const imageUploaded = await axios.post(
-            'https://api.cloudinary.com/v1_1/dhnkvzuxk/image/upload',
-            formData
-          );
-          values.avatarUrl = imageUploaded.data.secure_url;
+        if (inputType === 'file' && values.avatarUrl){
+          values.avatarUrl = await uploadImageToCloud(values.avatarUrl);
 
         }
       }
@@ -154,8 +148,8 @@ export default function EditProfileForm({initialValues}: { initialValues: any })
         {
           <div className='w-full relative bg-gray-200 overflow-hidden rounded-lg'>
             <div className="w-full h-full aspect-square">
-              {form.getValues().avatarUrl ? (
-                <img alt="avatar" src={form.getValues().avatarUrl}
+              {form.getValues().avatarUrl || tempSrcUrlForFile ? (
+                <img alt="avatar" src={tempSrcUrlForFile || form.getValues().avatarUrl}
                      className="object-cover w-full h-full bg-center"/>
               ) : (
                 <FaUser className="w-full h-full"/>
